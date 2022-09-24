@@ -1,0 +1,31 @@
+.userList {
+    display: flex;
+    margin-block: 15px;
+    h2 {
+        margin-bottom: 0;
+    }
+    img {
+        border-radius: 100%;
+        margin-right: 15px;
+    }
+}
+
+.userListHeader {
+    display: flex;
+    align-items: center;
+}
+
+#userTag {
+    margin: 0;
+    margin-top: 27px;
+    margin-left: 5px;
+    color: #646464;
+}
+
+.userItem {
+    margin-top: 7px;
+    p {
+        margin-top: 7px;
+        color: #646464;
+    }
+}
