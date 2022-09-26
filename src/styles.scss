@@ -5,13 +5,7 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
-  }
-  p {
-    font-family: 'Roboto', sans-serif;
-  }
-  li {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   
   code {
@@ -76,4 +70,7 @@ body {
     margin: auto;
     max-width: 1400px;
     padding-inline: 10px;
+    img {
+      max-width: 300px;
+    }
   }

@@ -2,11 +2,11 @@ import React from 'react'
 import Categories from './Categories'
 import Search from './Search'
 
-function Header({category, setCategory}) {
+function Header({setSearchValue, searchValue, category, setCategory, setIsActiveModal}) {
 
   return (
     <div className='header'>
-        <Search />
+        <Search searchValue={searchValue} setSearchValue={setSearchValue} setIsActiveModal={setIsActiveModal}/>
         <Categories category={category} setCategory={setCategory}/>
     </div>
   )
