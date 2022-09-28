@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategory } from '../../store/slices/filterAndSort'
 
+function Categories() {
 
-function Categories({category, setCategory}) {
-
+    const { categoryId } = useSelector(state => state.filter);
+    const dispatch = useDispatch()
+    
     const categories = ['Все','Дизайн', 'Аналитика', 'Менеджмент', 'iOS', 'Android'];
 
     return (
@@ -11,8 +15,8 @@ function Categories({category, setCategory}) {
                 {categories.map((categoryName, index)=> {
                     return (
                         <li key={index}
-                            onClick={() => setCategory(index)}
-                            className={category === index ? 'active' : ''}>
+                            onClick={() => dispatch(setCategory(index))}
+                            className={categoryId === index ? 'active' : ''}>
                         {categoryName}
                         </li> 
                     )  

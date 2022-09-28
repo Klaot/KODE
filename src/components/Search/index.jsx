@@ -1,5 +1,4 @@
 import React from 'react'
-import {useState} from 'react';
 import styles from './Search.module.scss';
 import Close from '../../assets/img/delete_icon.svg';
 import  SearchIcon  from '../../assets/img/search_icon.svg';
