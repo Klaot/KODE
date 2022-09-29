@@ -29,7 +29,7 @@ function Home() {
   
   useEffect(() => {
     setIsLoading(true)
-    axios.get(`https://stoplight.io/mocks/kod-frontend-team/koder-stoplight/86566464/users?__example=${activeCategory}&__dynamic=false`)
+    axios.get(`https://stoplight.io/mocks/kode-frontend-team/koder-stoplight/86566464/users?__example=${activeCategory}&__dynamic=false`)
       .then((response) => { 
         checkbox === 0 ? setUsers(response.data.items.sort((a,b) => a.firstName.localeCompare(b.firstName))) :
         checkbox === 1 ? setUsers(response.data.items.sort((a,b) => a.birthday - b.birthday)) : setUsers(response.data.items)
