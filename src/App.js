@@ -1,31 +1,21 @@
-import { useState } from 'react';
-import { Routes, Route } from "react-router-dom";
 import Header from './components/Header';
-import NotFound from './components/NotFound/NotFound';
+import NotFound from './components/NotFound';
 import Home from './page/Home';
 import Modal from './components/Modal';
+import { Routes, Route } from "react-router-dom";
 
 
 function App() {
 
-  const [isActiveModal, setIsActiveModal] = useState(true)
-  const [searchValue, setSearchValue] = useState('')
-
   return (
     <div className='container'>
-      <Header 
-        setSearchValue={setSearchValue}
-        searchValue={searchValue}
-        setIsActiveModal={setIsActiveModal}/>
+      <Header />
       <Routes>
-        <Route path="/" element={<Home setSearchValue={setSearchValue} searchValue={searchValue} />} />
-        <Route path="*" element={<NotFound/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      <Modal 
-        isActiveModal={isActiveModal} 
-        setIsActiveModal={setIsActiveModal}/>
-    </div>
-    
+      <Modal />
+    </div>  
   );
 }
 

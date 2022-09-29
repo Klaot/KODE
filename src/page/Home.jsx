@@ -1,15 +1,16 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Skeleton from '../components/Skeleton/Skeleton'
 import UserNotFound from '../components/UserNotFound'
 import UsersList from '../components/UsersList/UsersList'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 
 
-function Home({ searchValue }) {
+function Home() {
 
   const { categoryId, checkbox  } = useSelector(state => state.filter);
+  const { searchValue } = useSelector(state => state.search);
   const [ users, setUsers ] = useState([])
   const [ isLoading, setIsLoading ] = useState(true)
   const skeletonList = [1,2,3,4,5,6]
@@ -30,7 +31,7 @@ function Home({ searchValue }) {
         checkbox === 1 ? setUsers(response.data.items.sort((a,b) => a.birthday - b.birthday)) : setUsers(response.data.items)
         setIsLoading(false);
       })
-  }, [categoryId, checkbox]) 
+  }, [categoryId, checkbox, activeCategory]) 
   
   const filteredName = users.filter(item => {
     return item.firstName.toLowerCase().includes(searchValue.toLowerCase())

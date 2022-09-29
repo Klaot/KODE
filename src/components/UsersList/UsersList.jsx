@@ -14,7 +14,6 @@ function UsersList({firstName, lastName, avatarUrl, position, userTag}) {
                 </div>
               <p>{position}</p>  
             </div>
-            
         </div>
     </div>
   )

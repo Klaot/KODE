@@ -1,0 +1,25 @@
+.categories {
+    ul {
+      display: flex;
+      padding: 0;
+      margin-bottom: 0px;
+      li {
+        color: #979797;
+        margin-right: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.1s ease-in-out;
+        list-style-type: none;
+        padding-bottom: 5px;
+  
+        &:hover {
+          color: #646464;
+        }
+  
+        &.active {
+          border-bottom: 2px solid rgb(107, 107, 107);
+          color: #000;
+        }
+      }
+    }
+  }

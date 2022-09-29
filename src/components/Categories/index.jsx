@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Categories.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory } from '../../store/slices/filterAndSort'
 
@@ -10,7 +11,7 @@ function Categories() {
     const categories = ['Все','Дизайн', 'Аналитика', 'Менеджмент', 'iOS', 'Android'];
 
     return (
-        <div className="categories">
+        <div className={styles.categories}>
             <ul>
                 {categories.map((categoryName, index)=> {
                     return (

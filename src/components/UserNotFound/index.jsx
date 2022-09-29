@@ -2,7 +2,6 @@ import React from 'react';
 import Glass from '../../assets/img/glass.png';
 import styles from './UserNotFound.module.scss';
 
-
 function UserNotFound() {
   return (
     <div className={styles.userNotFound}>
@@ -10,7 +9,6 @@ function UserNotFound() {
         <h1>Мы никого не нашли</h1>
         <p>Попробуй скорректировать запрос</p>
     </div>
-  )
-}
+  )}
 
 export default UserNotFound
