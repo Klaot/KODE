@@ -4,7 +4,6 @@ import Home from './page/Home';
 import Modal from './components/Modal';
 import { Routes, Route } from "react-router-dom";
 
-
 function App() {
 
   return (

@@ -5,7 +5,9 @@ import UserNotFound from '../components/UserNotFound'
 import UsersList from '../components/UsersList/UsersList'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import ErrorComponent from '../components/ErrorComponent';
 
+const skeletonList = [1,2,3,4,5,6]
 
 function Home() {
 
@@ -13,8 +15,10 @@ function Home() {
   const { searchValue } = useSelector(state => state.search);
   const [ users, setUsers ] = useState([])
   const [ isLoading, setIsLoading ] = useState(true)
-  const skeletonList = [1,2,3,4,5,6]
+  const [ isError , setIsError ] = useState(false)
 
+  // Использую фильтрацию на стороне сервера. Если бы по запросу возвращалось очень большое количество 
+  // пользователей, то делать фильтрацию на стороне клиента могло быть ресурсозатратно и процес бы перегружал устройство.*
 
   let activeCategory = categoryId === 0 ? 'all' 
   : categoryId === 1 ? 'design' 
@@ -25,14 +29,15 @@ function Home() {
   
   useEffect(() => {
     setIsLoading(true)
-    axios.get(`https://stoplight.io/mocks/kode-frontend-team/koder-stoplight/86566464/users?__example=${activeCategory}&__dynamic=false`)
+    axios.get(`https://stoplight.io/mocks/kod-frontend-team/koder-stoplight/86566464/users?__example=${activeCategory}&__dynamic=false`)
       .then((response) => { 
         checkbox === 0 ? setUsers(response.data.items.sort((a,b) => a.firstName.localeCompare(b.firstName))) :
         checkbox === 1 ? setUsers(response.data.items.sort((a,b) => a.birthday - b.birthday)) : setUsers(response.data.items)
         setIsLoading(false);
-      })
-  }, [categoryId, checkbox, activeCategory]) 
+      }).catch( err => setIsError(true)) 
+  }, [categoryId, checkbox, activeCategory, isError]) 
   
+  //Фильтрация по поиску.
   const filteredName = users.filter(item => {
     return item.firstName.toLowerCase().includes(searchValue.toLowerCase())
   })
@@ -40,7 +45,7 @@ function Home() {
   return (
       <div className='container'>
         <div className='all-users'>
-          { isLoading ? skeletonList.map((item, index) => <Skeleton key={index} />) :
+          { isError ? <ErrorComponent setIsError = {setIsError}/> : isLoading ? skeletonList.map((item, index) => <Skeleton key={index} />) :
             filteredName.length === 0 ? <UserNotFound /> : filteredName.map((item, index) => {
               return <UsersList 
                 key={index}
@@ -50,7 +55,7 @@ function Home() {
                 position={item.position}
                 userTag={item.userTag === 'string' ? '' : item.userTag}
               />
-            })
+            }) 
           }
         </div> 
     </div>
