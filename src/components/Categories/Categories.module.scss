@@ -15,11 +15,19 @@
         &:hover {
           color: #646464;
         }
-  
-        &.active {
-          border-bottom: 2px solid rgb(107, 107, 107);
-          color: #000;
-        }
       }
     }
+
+    @media (max-width: 485px) {
+      
+        ul {
+          overflow: scroll;
+        }
+      
+    }
+  }
+
+  #active {
+    border-bottom: 2px solid rgb(107, 107, 107);
+    color: #000;
   }

@@ -24,7 +24,15 @@ body {
     padding-inline: 10px;
   }
 
- 
+ #Link {
+  text-decoration: none;
+ }
+
+ a:-webkit-any-link {
+  color: black;
+  cursor: pointer;
+}
+
   .all-users {
     margin-block: 40px;
   }

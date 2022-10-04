@@ -1,0 +1,72 @@
+.userPage {
+    max-width: 1470px;
+}
+
+.headerInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F7F7F8;
+    padding-block: 72px 24px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    img {
+        border-radius: 100%;
+        width: 104px;
+    }
+}
+
+.userName {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    h1 {
+        margin-top: 24px;
+        margin-bottom: 12px;
+        font-size: 24px;
+        line-height: 28px;
+    }
+    p {
+        margin-left: 10px;
+        margin-top: 24px;
+        color: #97979B;
+    }
+}
+
+.position {
+    font-size: 13px;
+    line-height: 16px;
+    color: #646464;
+    margin-top: 0px;
+}
+
+.userBirthday {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+        margin-right: 13px;
+    }
+}
+
+.userNumber {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+        margin-right: 13px;
+    }
+}
+
+.userNumberAndBirthday {
+    color: #050510;
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 28px;
+    padding-bottom: 324px;
+}

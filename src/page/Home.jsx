@@ -1,11 +1,14 @@
-import React from 'react'
+import React from 'react';
 import axios from 'axios';
-import Skeleton from '../components/Skeleton/Skeleton'
-import UserNotFound from '../components/UserNotFound'
-import UsersList from '../components/UsersList/UsersList'
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import Skeleton from '../components/Skeleton/Skeleton';
+import UserNotFound from '../components/UserNotFound';
+import UsersList from '../components/UsersList/UsersList';
 import ErrorComponent from '../components/ErrorComponent';
+import Header from '../components/Header'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+
 
 const skeletonList = [1,2,3,4,5,6]
 
@@ -16,6 +19,7 @@ function Home() {
   const [ users, setUsers ] = useState([])
   const [ isLoading, setIsLoading ] = useState(true)
   const [ isError , setIsError ] = useState(false)
+  
 
   // Использую фильтрацию на стороне сервера. Если бы по запросу возвращалось очень большое количество 
   // пользователей, то делать фильтрацию на стороне клиента могло быть ресурсозатратно и процес бы перегружал устройство.*
@@ -44,17 +48,11 @@ function Home() {
 
   return (
       <div className='container'>
+        <Header />
         <div className='all-users'>
           { isError ? <ErrorComponent setIsError = {setIsError}/> : isLoading ? skeletonList.map((item, index) => <Skeleton key={index} />) :
             filteredName.length === 0 ? <UserNotFound /> : filteredName.map((item, index) => {
-              return <UsersList 
-                key={index}
-                avatarUrl={item.avatarUrl}
-                firstName={item.firstName}
-                lastName={item.lastName}
-                position={item.position}
-                userTag={item.userTag === 'string' ? '' : item.userTag}
-              />
+              return <UsersList key={index} index={index} {...item} />
             }) 
           }
         </div> 

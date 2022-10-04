@@ -17,7 +17,7 @@ function Categories() {
                     return (
                         <li key={index}
                             onClick={() => dispatch(setCategory(index))}
-                            className={categoryId === index ? 'active' : ''}>
+                            id={categoryId === index ? styles.active : ''}>
                         {categoryName}
                         </li> 
                     )  
