@@ -70,3 +70,14 @@
     padding-top: 28px;
     padding-bottom: 324px;
 }
+
+.age {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   p {
+    color: #646464;
+    font-size: 16px;
+    line-height: 20px;
+   }
+}
