@@ -23,6 +23,9 @@
         ul {
           overflow: scroll;
         }
+        ul::-webkit-scrollbar {
+          width: 0;
+        }
       
     }
   }

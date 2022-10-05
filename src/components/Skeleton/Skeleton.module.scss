@@ -1,4 +1,7 @@
 .skeleton {
     display: flex;
     flex-direction: column;
+    @media ( max-width: 500px ) {
+        max-width: 280px;
+    }
 }

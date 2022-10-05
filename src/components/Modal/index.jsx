@@ -23,8 +23,8 @@ function Modal() {
                     {
                       checkboxs.map((item, index) => {
                         return  <div key={index} onClick={() => dispatch(setCheckbox(index))}  className={styles.modalCheckbox}>
-                                    <input type='checkbox' onChange={() => dispatch(setCheckbox(index))} checked={index === checkbox ? true : false}/> 
-                                    <h3>{item}</h3>
+                                    <input className={styles.customCheckbox} type='checkbox' onChange={() => dispatch(setCheckbox(index))} checked={index === checkbox ? true : false}/> 
+                                    <label><b>{item}</b></label>
                                 </div>
                          })
                     }

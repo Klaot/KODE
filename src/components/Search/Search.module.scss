@@ -43,6 +43,23 @@
     cursor: pointer;
 }
 
+.sortActive {
+    width: 25px;
+    opacity: 0.8;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    @media ( max-width: 500px ) {
+        width: 25px;
+        opacity: 0.8;
+        position: absolute;
+        top: 10px;
+        right: 100px;
+        cursor: pointer;
+    }
+}
+
 .cancel {
     width: 20px;
     height: 20px;
@@ -50,7 +67,26 @@
     cursor: pointer;
     position: absolute;
     right: 40px;
+    @media ( max-width: 500px ) {
+        display: none;
+    }
 }
 .cancel:hover {
     opacity: 1;
+}
+
+.buttonClear {
+    display: none;
+    @media ( max-width: 500px ) {
+        display: block;
+        border: none;
+        margin-left: 10px;
+        font-size: 14px;
+        line-height: 18px;
+        background-color: transparent;
+        color: #6534FF;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+    }
 }

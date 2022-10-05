@@ -20,8 +20,12 @@ function Search() {
             <input value={searchValue} onChange={(e) => dispatch(setSearchValue(e.target.value))} className={styles.input} placeholder='Введите имя, тег, почту...'/>
             {
               searchValue && <img onClick={() => dispatch(setSearchValue(''))} className={styles.cancel} src={Close} alt='cancel icon'/>
+            } 
+            <img onClick={() => dispatch(setActiveModal(false))} className={searchValue ? styles.sortActive : styles.sort } src={SortIcon} alt='sort icon'/>
+            {
+              searchValue && <button onClick={() => dispatch(setSearchValue(''))} className={styles.buttonClear}>Отмена</button>
             }
-            <img onClick={() => dispatch(setActiveModal(false))} className={styles.sort} src={SortIcon} alt='sort icon'/>
+            
         </div>
     </section> 
   )
