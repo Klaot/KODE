@@ -5,6 +5,7 @@ import UserNotFound from '../components/UserNotFound';
 import UsersList from '../components/UsersList/UsersList';
 import ErrorComponent from '../components/ErrorComponent';
 import Header from '../components/Header'
+import useDebounce from '../hooks/useDebounce';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -19,8 +20,8 @@ function Home() {
   const [ users, setUsers ] = useState([])
   const [ isLoading, setIsLoading ] = useState(true)
   const [ isError , setIsError ] = useState(false)
+  const debouncedSearchTerm = useDebounce(searchValue, 1000)
   
-
   // Использую фильтрацию на стороне сервера. Если бы по запросу возвращалось очень большое количество 
   // пользователей, то делать фильтрацию на стороне клиента могло быть ресурсозатратно и процес бы перегружал устройство.*
 
@@ -39,11 +40,12 @@ function Home() {
         checkbox === 1 ? setUsers(response.data.items.sort((a,b) => a.birthday - b.birthday)) : setUsers(response.data.items)
         setIsLoading(false);
       }).catch( err => setIsError(true)) 
+
   }, [categoryId, checkbox, activeCategory, isError]) 
   
   //Фильтрация по поиску.
   const filteredName = users.filter(item => {
-    return item.firstName.toLowerCase().includes(searchValue.toLowerCase())
+    return item.firstName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
   })
 
   return (
