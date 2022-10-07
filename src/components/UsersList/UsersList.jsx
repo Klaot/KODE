@@ -40,3 +40,4 @@ function UsersList({index, firstName, lastName, avatarUrl, position, userTag, ph
 }
 
 export default UsersList
+

@@ -1,18 +1,27 @@
 import React from 'react'
 import StarIcon from '../../assets/img/star.png';
 import PhoneIcon from '../../assets/img/phone-icon.png';
+import goBackIcon from '../../assets/img/goback.png'
 import styles from './UserPage.module.scss';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function UserPage() {
 
   const user =  useSelector(state => state.userItem);
   let foo = user.birthday.split('-');
+  const navigate = useNavigate()
+
+  const goBack = () => {
+    navigate(-1)
+  }
 
   return (
     <div className={styles.userPage}>
       <div className={styles.headerInfo}>
+        <button className={styles.buttonGoBack} onClick={goBack}><img src={goBackIcon} alt='goBack icon'/></button>
         <div className={styles.userInfo}>
           <img src={user.avatarUrl} alt='avatarUrl icon'/>
           <div className={styles.userName}>
@@ -38,7 +47,7 @@ function UserPage() {
       </div>
       <div className={styles.userNumber}>
         <img src={PhoneIcon} alt='phone-icon'/>
-        <h4>{user.phone}</h4>
+        <a href={`tel:${user.phone}`}><b>{user.phone}</b></a>
       </div>
      </div>
     </div>

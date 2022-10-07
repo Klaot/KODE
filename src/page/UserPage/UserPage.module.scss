@@ -45,6 +45,15 @@
     margin-top: 0px;
 }
 
+.buttonGoBack {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    cursor: pointer;
+    top: 17px;
+    left: 15px;
+}
+
 .userBirthday {
     display: flex;
     flex-direction: row;
@@ -58,6 +67,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    a {
+        text-decoration: none;
+    }
     img {
         margin-right: 13px;
     }
