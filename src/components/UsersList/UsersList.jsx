@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './UserList.module.scss';
-import {useDispatch} from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import {setUserItem} from '../../store/slices/userItem';
 import { Link } from 'react-router-dom';
 
 function UsersList({index, firstName, lastName, avatarUrl, position, userTag, phone, birthday}) {
 
+  const { checkbox } = useSelector(state => state.filter);
   const dispatch = useDispatch()
 
   const itemInfo = (firstName, lastName, avatarUrl, position, userTag, phone, birthday) => {
@@ -21,9 +22,20 @@ function UsersList({index, firstName, lastName, avatarUrl, position, userTag, ph
       dispatch(setUserItem(itemStore));
   }
 
+  const birthdayTransform = () => {
+    let userBirthdayArry = birthday.split('-');
+     let foo = new Date(userBirthdayArry[0], userBirthdayArry[1], userBirthdayArry[2]).toLocaleString('ru' , {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+    return foo.slice(0,7) + '.'
+  }
+
+
   return (
-    <div onClick={() => itemInfo(firstName, lastName, avatarUrl, position, userTag, phone, birthday)}>
-      <Link id='Link' to={`/user/${index}`}>
+    <div  onClick={() => itemInfo(firstName, lastName, avatarUrl, position, userTag, phone, birthday)}>
+      <Link className={styles.userAllInfo} id='Link' to={`/user/${index}`}>
         <div className={styles.userList}>
             <img src={avatarUrl} alt='user avatar'/>
             <div className={styles.userItem}>
@@ -34,6 +46,7 @@ function UsersList({index, firstName, lastName, avatarUrl, position, userTag, ph
               <p>{position}</p>  
             </div>
         </div>
+        <p className={styles.birthdayDay}>{checkbox === 1 ? birthdayTransform() : ''}</p>
         </Link>
     </div>
   )

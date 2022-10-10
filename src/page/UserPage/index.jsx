@@ -11,7 +11,8 @@ import { useNavigate } from 'react-router-dom';
 function UserPage() {
 
   const user =  useSelector(state => state.userItem);
-  let foo = user.birthday.split('-');
+  let userBirthday = user.birthday.split('-');
+  let fullYears = new Date().getFullYear() - user.birthday.slice(0,4)
   const navigate = useNavigate()
 
   const goBack = () => {
@@ -36,14 +37,14 @@ function UserPage() {
       <div className={styles.age}>
         <div className={styles.userBirthday}>
           <img src={StarIcon} alt='star-icon'/>
-          <h4>{new Date(foo[0], foo[1], foo[2]).toLocaleString('ru' , {
+          <h4>{new Date(userBirthday[0], userBirthday[1], userBirthday[2]).toLocaleString('ru' , {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
               })}
           </h4>
         </div>
-        <p>Возраст: { new Date().getFullYear() - user.birthday.slice(0,4) }</p>
+        <p>Возраст: {fullYears}</p>
       </div>
       <div className={styles.userNumber}>
         <img src={PhoneIcon} alt='phone-icon'/>

@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 
-
 const skeletonList = [1,2,3,4,5,6]
 
 function Home() {
@@ -37,12 +36,13 @@ function Home() {
     axios.get(`https://stoplight.io/mocks/kode-frontend-team/koder-stoplight/86566464/users?__example=${activeCategory}&__dynamic=false`)
       .then((response) => { 
         checkbox === 0 ? setUsers(response.data.items.sort((a,b) => a.firstName.localeCompare(b.firstName))) :
-        checkbox === 1 ? setUsers(response.data.items.sort((a,b) => a.birthday - b.birthday)) : setUsers(response.data.items)
+        checkbox === 1 ? setUsers(response.data.items.sort((a,b) => a.birthday.slice(5,7) - b.birthday.slice(5,7))) : setUsers(response.data.items)
         setIsLoading(false);
       }).catch( err => setIsError(true)) 
 
   }, [categoryId, checkbox, activeCategory, isError]) 
   
+
   //Фильтрация по поиску.
   const filteredName = users.filter(item => {
     return item.firstName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())

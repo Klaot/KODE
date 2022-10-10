@@ -25,6 +25,12 @@
     }
 }
 
+.userAllInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .userListHeader {
     display: flex;
     align-items: center;
@@ -50,7 +56,10 @@
     p {
         margin-top: 7px;
         color: #646464;
-    }
-   
-    
+    }   
+}
+
+.birthdayDay {
+    color: #646464;
+    font-size: 13px;
 }
