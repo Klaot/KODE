@@ -24,8 +24,7 @@ function Search() {
             <img onClick={() => dispatch(setActiveModal(false))} className={searchValue ? styles.sortActive : styles.sort } src={SortIcon} alt='sort icon'/>
             {
               searchValue && <button onClick={() => dispatch(setSearchValue(''))} className={styles.buttonClear}>Отмена</button>
-            }
-            
+            } 
         </div>
     </section> 
   )

@@ -4,10 +4,12 @@ import { useSelector, useDispatch} from 'react-redux';
 import {setUserItem} from '../../store/slices/userItem';
 import { Link } from 'react-router-dom';
 
-function UsersList({index, firstName, lastName, avatarUrl, position, userTag, phone, birthday}) {
+
+function UsersList({index, firstName, lastName, avatarUrl, position, userTag, phone, birthday, currr}) {
 
   const { checkbox } = useSelector(state => state.filter);
   const dispatch = useDispatch()
+
 
   const itemInfo = (firstName, lastName, avatarUrl, position, userTag, phone, birthday) => {
     let itemStore = {
@@ -31,7 +33,7 @@ function UsersList({index, firstName, lastName, avatarUrl, position, userTag, ph
     })
     return foo.slice(0,7) + '.'
   }
-
+ 
 
   return (
     <div  onClick={() => itemInfo(firstName, lastName, avatarUrl, position, userTag, phone, birthday)}>
