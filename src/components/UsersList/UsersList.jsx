@@ -5,7 +5,7 @@ import {setUserItem} from '../../store/slices/userItem';
 import { Link } from 'react-router-dom';
 
 
-function UsersList({index, firstName, lastName, avatarUrl, position, userTag, phone, birthday, currr}) {
+function UsersList({index, firstName, lastName, avatarUrl, position, userTag, phone, birthday,}) {
 
   const { checkbox } = useSelector(state => state.filter);
   const dispatch = useDispatch()
@@ -26,12 +26,12 @@ function UsersList({index, firstName, lastName, avatarUrl, position, userTag, ph
 
   const birthdayTransform = () => {
     let userBirthdayArry = birthday.split('-');
-     let foo = new Date(userBirthdayArry[0], userBirthdayArry[1], userBirthdayArry[2]).toLocaleString('ru' , {
+     let formatedUserBirthday = new Date(userBirthdayArry[0], userBirthdayArry[1], userBirthdayArry[2]).toLocaleString('ru' , {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     })
-    return foo.slice(0,7) + '.'
+    return formatedUserBirthday.slice(0,7) + '.'
   }
  
 

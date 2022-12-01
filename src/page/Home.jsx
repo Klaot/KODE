@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Skeleton from '../components/Skeleton/Skeleton';
 import UserNotFound from '../components/UserNotFound';
 import UsersList from '../components/UsersList/UsersList';
@@ -7,66 +6,53 @@ import ErrorComponent from '../components/ErrorComponent';
 import Header from '../components/Header'
 import useDebounce from '../hooks/useDebounce';
 import UserListSortData from '../components/UsersList/UserListSortData';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-//__example=${activeCategory}&
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUsers } from '../store/slices/getUsersSlice';
+
 
 const skeletonList = [1,2,3,4,5,6]
 
 function Home() {
 
-  const { categoryId, checkbox  } = useSelector(state => state.filter); // Выбранная категория и способ сортировки.
-  const { searchValue } = useSelector(state => state.search); // Состояние строки поиска.
-  const [ users, setUsers ] = useState([]) // Массив с пользователями.
-  const [ isLoading, setIsLoading ] = useState(true) // Состояние загрузки.
-  const [ isError , setIsError ] = useState(false)  // Состояние ошибки
-  const debouncedSearchTerm = useDebounce(searchValue, 1000) // Функция отвечающия за задержку запроса при вводе в строку поиска
-
-  
-  // Использую фильтрацию на стороне сервера. Если бы по запросу возвращалось очень большое количество 
-  // пользователей, то делать фильтрацию на стороне клиента могло быть ресурсозатратно и процес бы перегружал устройство.*
-
-  let activeCategory = categoryId === 0 ? 'all' 
-  : categoryId === 1 ? 'design' 
-  : categoryId === 2 ? 'analytics' 
-  : categoryId === 3 ? 'management' 
-  : categoryId === 4 ? 'ios' 
-  : categoryId === 5 ? 'android' : 'all';
+  const {category, checkbox } = useSelector(state => state.filter); 
+  const {users} = useSelector((state => state.users))
+  const {status} = useSelector((state => state.users))
+  const {searchValue} = useSelector(state => state.search);
+  const debouncedSearchTerm = useDebounce(searchValue, 1000) 
+  const dispatch = useDispatch()
   
   useEffect(() => {
-    setIsLoading(true)
-    axios.get(`https://stoplight.io/mocks/kode-frontend-team/koder-stoplight/86566464/users?__example=${activeCategory}&__dynamic=true`)
-      .then((response) => { 
-        checkbox === 0 ? setUsers(response.data.items.sort((a,b) => a.firstName.localeCompare(b.firstName))) :
-        setUsers(response.data.items) 
-        setIsLoading(false);
-      }).catch( err => setIsError(true)) 
-
-  }, [categoryId, checkbox, activeCategory, isError,]) 
+     dispatch(fetchUsers({category, checkbox}))
+  }, [category, checkbox]) 
+  
   
 
-
-  //Фильтрация по поиску.
-
   let filteredName =  users.filter(item => {
-    return item.firstName.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+    return item.firstName.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) //Фильтрация по строке поиска.
   })
+
+  let renderFilteredNames;
+  if (filteredName.length !== 0 && checkbox === 0) {
+     renderFilteredNames = filteredName.map((item, index) => {
+        return <UsersList key={index} index={index} {...item}/> 
+      })
+  } else if (filteredName.length !== 0 && checkbox === 1) {
+     renderFilteredNames = <UserListSortData filteredName={filteredName}/>
+  } else {
+     renderFilteredNames = <UserNotFound />
+  }
  
+  const skeletons =  skeletonList.map((item, index) => <Skeleton key={index} />)
+  const errors =  <ErrorComponent/>
 
   return (
       <div className='container'>
         <Header />
         <div className='all-users'>
-          { 
-            checkbox === 0 ? // Если выбрана сортировка по алфавиту
-            isError ? <ErrorComponent setIsError = {setIsError}/> : // Проверка ошибки
-            isLoading ? skeletonList.map((item, index) => <Skeleton key={index} />) : // Если еще идет загрузка показываем скелетон.
-            filteredName.length === 0 ? <UserNotFound /> : filteredName.map((item, index) => {
-              return <UsersList key={index} index={index} {...item}/> 
-            }) : checkbox === 1 ? // Если выбрана сортировка по дате рождения
-            isError ? <ErrorComponent setIsError = {setIsError}/> : // Проверка ошибки
-            isLoading ? skeletonList.map((item, index) => <Skeleton key={index} />) :// Если еще идет загрузка показываем скелетон.
-            filteredName.length === 0 ? <UserNotFound /> : <UserListSortData filteredName={filteredName}/> : null
+          {
+           status === 'error' ? errors : 
+           status === 'loading' ? skeletons : renderFilteredNames
           }
         </div> 
     </div>

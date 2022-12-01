@@ -6,8 +6,6 @@ import {setUserItem} from '../../../store/slices/userItem';
 import { Link } from 'react-router-dom';
 import styles from './UserList.module.scss'
 
-
-
 function UserListSortData({filteredName}) {
 
     const [users, setUsers] = useState([])
@@ -84,24 +82,24 @@ function UserListSortData({filteredName}) {
         {
           users.length !== 0 ?  hr : null
         }
-         {
-          users.length === 0 ? null : users.skipped.map((user, index) => {
-                return  <div key={user.id} onClick={() => itemInfo(user.firstName, user.lastName, user.avatarUrl, user.position, user.userTag, user.phone, user.birthday)}>
-                          <Link className={styles.userAllInfo} id='Link' to={`/user/${index}`}>
-                            <div className={styles.userList}>
-                                <img src={user.avatarUrl} alt='user avatar'/>
-                                <div className={styles.userItem}>
-                                    <div className={styles.userListHeader}>
-                                        <h2>{user.firstName} {user.lastName}</h2>
-                                        <p id={styles.userTag}>{user.userTag === 'string' ? '' : user.userTag}</p>
-                                    </div>
-                                  <p>{user.position}</p>  
-                                </div>
-                            </div>
-                            <p className={styles.birthdayDay}>{checkbox === 1 ? birthdayTransform(user) : ''}</p>
-                            </Link>
-                        </div>
-                      })
+        {
+        users.length === 0 ? null : users.skipped.map((user, index) => {
+          return  <div key={user.id} onClick={() => itemInfo(user.firstName, user.lastName, user.avatarUrl, user.position, user.userTag, user.phone, user.birthday)}>
+                    <Link className={styles.userAllInfo} id='Link' to={`/user/${index}`}>
+                      <div className={styles.userList}>
+                          <img src={user.avatarUrl} alt='user avatar'/>
+                          <div className={styles.userItem}>
+                              <div className={styles.userListHeader}>
+                                  <h2>{user.firstName} {user.lastName}</h2>
+                                  <p id={styles.userTag}>{user.userTag === 'string' ? '' : user.userTag}</p>
+                              </div>
+                            <p>{user.position}</p>  
+                          </div>
+                      </div>
+                      <p className={styles.birthdayDay}>{checkbox === 1 ? birthdayTransform(user) : ''}</p>
+                      </Link>
+                  </div>
+            })
         } 
     </div>
   )

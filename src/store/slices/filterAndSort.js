@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    categoryId: 0,
+    category: 'all',
     checkbox: 0,
 }
 
@@ -10,7 +10,7 @@ export const filterSlice = createSlice({
     initialState,
     reducers: {
         setCategory: (state, active) => {
-            state.categoryId = active.payload
+            state.category = active.payload
         },
         setCheckbox: (state, active) => {
             state.checkbox = active.payload
